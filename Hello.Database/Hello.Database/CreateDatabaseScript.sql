@@ -19,8 +19,7 @@ END;
 CREATE TABLE Users
 (
 	[UserId] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
-    [FirstName] NVARCHAR(100) NULL, 
-    [LastName] NVARCHAR(100) NULL, 
+    [AliasName] NVARCHAR(100) NULL, 
     [AccountName] NVARCHAR(100) NULL, 
     [AccountState] NVARCHAR(50) NULL, 
     [ExpierencePoints] INT NULL, 
@@ -73,12 +72,11 @@ GO;
 CREATE PROCEDURE [dbo].[usp_User_Create]
 
 	@UserId uniqueidentifier,
-	@FirstName NVARCHAR(100),
-	@LastName NVARCHAR(100),
+	@AliasName NVARCHAR(100),
 	@AccountName NVARCHAR(100)
 AS
 Begin
-	INSERT INTO Users (UserId,FirstName,LastName,AccountName) Values(@UserId,@FirstName,@LastName,@AccountName)
+	INSERT INTO Users (UserId,AliasName,AccountName) Values(@UserId,@AliasName,@AccountName)
 End
 GO;
 
@@ -134,8 +132,7 @@ GO;
 
 CREATE PROCEDURE [dbo].[usp_User_Update]
 	@UserId uniqueidentifier,
-	@FirstName NVARCHAR(100),
-	@LastName NVARCHAR(100),
+	@AliasName NVARCHAR(100),
 	@AccountName NVARCHAR(100),
 	@AccountState NVARCHAR(100),
 	@Picture BINARY(50),
@@ -143,8 +140,7 @@ CREATE PROCEDURE [dbo].[usp_User_Update]
 AS
 BEGIN
 	Update Users SET
-	FirstName = @FirstName,
-	LastName = @LastName,
+	AliasName = @AliasName,
 	AccountState = @AccountState,
 	Picture = @Picture,
 	ExpierencePoints = @ExpierencePionts
