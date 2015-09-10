@@ -174,13 +174,14 @@ END
 GO;
 
 CREATE PROCEDURE [dbo].[usp_Relationship_Delete]
-@UserId uniqueidentifier
+@UserId uniqueidentifier,
+@FriendId uniqueidentifier
 
 AS
 
 BEGIN
 	DELETE FROM Relationship
-	WHERE UserId = @UserId
+	WHERE UserId = @UserId And FriendsId = @FriendId
 END
 GO;
 
