@@ -20,10 +20,11 @@ CREATE TABLE Users
 (
 	[UserId] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
     [AliasName] NVARCHAR(100) NULL, 
-    [AccountName] NVARCHAR(100) NULL, 
+    [AccountName] NVARCHAR(100) NOT NULL, 
     [AccountState] NVARCHAR(50) NULL, 
     [ExpierencePoints] INT NULL, 
-    [Picture] BINARY(50) NULL
+    [Picture] BINARY(50) NULL, 
+    [Password] BINARY(50) NOT NULL
 );
 
 IF EXISTS(SELECT * 
@@ -70,13 +71,12 @@ END
 GO;
 
 CREATE PROCEDURE [dbo].[usp_User_Create]
-
 	@UserId uniqueidentifier,
-	@AliasName NVARCHAR(100),
+	@Password binary(50),
 	@AccountName NVARCHAR(100)
 AS
 Begin
-	INSERT INTO Users (UserId,AliasName,AccountName) Values(@UserId,@AliasName,@AccountName)
+	INSERT INTO Users (UserId,Password,AccountName) Values(@UserId,@Password,@AccountName)
 End
 GO;
 
@@ -134,6 +134,7 @@ CREATE PROCEDURE [dbo].[usp_User_Update]
 	@UserId uniqueidentifier,
 	@AliasName NVARCHAR(100),
 	@AccountName NVARCHAR(100),
+	@Password binary(50),
 	@AccountState NVARCHAR(100),
 	@Picture BINARY(50),
 	@ExpierencePionts int
@@ -143,8 +144,8 @@ BEGIN
 	AliasName = @AliasName,
 	AccountState = @AccountState,
 	Picture = @Picture,
-	ExpierencePoints = @ExpierencePionts
-	WHERE AccountName = @AccountName
+	ExpierencePoints = @ExpierencePionts,
+	Password = @Password
 END
 GO;
 

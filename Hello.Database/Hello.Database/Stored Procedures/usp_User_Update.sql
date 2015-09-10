@@ -2,6 +2,7 @@
 	@UserId uniqueidentifier,
 	@AliasName NVARCHAR(100),
 	@AccountName NVARCHAR(100),
+	@Password binary(50),
 	@AccountState NVARCHAR(100),
 	@Picture BINARY(50),
 	@ExpierencePionts int
@@ -11,5 +12,6 @@ BEGIN
 	AliasName = @AliasName,
 	AccountState = @AccountState,
 	Picture = @Picture,
-	ExpierencePoints = @ExpierencePionts
+	ExpierencePoints = @ExpierencePionts,
+	Password = @Password
 END
